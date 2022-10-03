@@ -7,7 +7,7 @@ const CategoryItem = (props) => {
       <img
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
-        alt={title}
+        alt=""
       />
       <div className="category-body-container">
         <h2>{title}</h2>
