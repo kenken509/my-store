@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../src/components/routes/home/home.component';
 import Navigation from '../src/components/routes/navigation/navigation.component';
 import Authentication from './components/routes/authentication/authentication.component';
+import { TestContext } from './context/user.context';
 
 const App = () => {
   // const categories = [

@@ -6,9 +6,13 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from 'firebase/auth';
 
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+
+//******************END OF IMPORTS******************************/
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -42,10 +46,10 @@ export const createUserDocFromAuth = async (
   if (!userAuth) return; // if did not receive userauth then return.
 
   const userDocRef = doc(db, 'users', userAuth.uid); // doc(database, 'name of collections', 'unique identifier or unique id')
-  console.log(userDocRef);
+
   const userSnapShot = await getDoc(userDocRef);
-  console.log(userSnapShot);
-  console.log(userSnapShot.exists()); // this will return false
+
+  //console.log(userSnapShot.exists()); // this will return false
   if (!userSnapShot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -73,4 +77,12 @@ export const signInAuthWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
   // console.log(authUser);
+};
+
+export const signOutUser = async () => {
+  await signOut(auth);
+};
+
+export const onAuthStateChangedListener = (callback) => {
+  onAuthStateChanged(auth, callback);
 };
